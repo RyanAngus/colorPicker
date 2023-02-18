@@ -2,6 +2,9 @@
 let colorInput = document.getElementById("seedColor")
 let scheme = document.getElementById("colorScheme")
 let button = document.getElementById("btn")
+let alert = document.getElementById("alert")
+let swatch = document.getElementById("swatch")
+let isColorFetch = false
 
 // swatches to copy:
 
@@ -13,6 +16,7 @@ let swatchFive = document.getElementById("color5swatch")
 
 /* taking the hex value from the color selector and placing it above the color swatch */
 button.addEventListener("click", function() {
+    isColorFetch = true
     let displayColor = colorInput.value
     let cleanHex = displayColor.substring(1)
     
@@ -61,4 +65,20 @@ swatchFour.addEventListener("click", function() {
 
 swatchFive.addEventListener("click", function() {
     navigator.clipboard.writeText(`${color5hex.innerHTML}`)
+ })
+
+ //Event listener for alerting 'copy to clipboard'
+alert.classList.add('hidden')
+
+ swatch.addEventListener("click", function() {
+    
+    if (isColorFetch) {
+        alert.classList.remove('hidden')
+        setTimeout(() => {
+            alert.classList.add('hidden')
+          }, "3000")
+    } else {
+        return
+    }
+    
  })
